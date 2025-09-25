@@ -10,12 +10,17 @@ from matplotlib import pyplot as plt
 
 
 
-
+#Defining the csv file to read (currently a single file within the same directory)
 DataFile= 'data0x00.csv'
+
+#Initializing lists to hold X data from column 1 and Y data from column 2
 X_Data=[]
 Y_Data=[]
 
+
+
 def ReadCsv():
+  # Opening the predefined csv Data file 
    with open(DataFile,'r') as f: 
     # Grabbing the header of the file 
     header= f.readline().strip().split(',')
