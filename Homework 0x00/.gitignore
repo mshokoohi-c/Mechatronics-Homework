@@ -1,2 +1,5 @@
 # Ignore Python bytecode cache
 __pycache__/
+
+#Ignore docx files
+*.docx
