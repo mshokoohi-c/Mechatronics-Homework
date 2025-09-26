@@ -29,7 +29,7 @@ def ReadCsv(File):
     header= f.readline().strip().split(',')
 
     # Iterating through all rows of the csv file
-    for row in f:
+    for id, row in enumerate(f):
         RawData=row.strip().split(',')
 
         # Checking if the vales in the first 2 columns of each row
@@ -39,6 +39,7 @@ def ReadCsv(File):
           float(RawData[1])
         
         except ValueError:
+          print(f"Column number:{id} value:{row}")
           continue
          
         # Creating the lists for X and Y data 
