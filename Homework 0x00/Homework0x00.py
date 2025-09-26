@@ -15,7 +15,7 @@ Y_Data=[]
 
 def ReadCsv(File):
   '''
-  Input a csv file that needs to be read in format r"The file directory you want in windows format" 
+  Input: a csv file that needs to be read in format r"The file directory you want in windows format" 
   
   Description: Only data in the first two columns of each row are converted to type float and stored in lists to be output. Note that the 
   first row is presumed to be the header and is therefore only used for labeling the x and y axis so the values in those cells are neglected. 
