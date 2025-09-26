@@ -39,9 +39,9 @@ def ReadCsv(File):
           float(RawData[1])
         
         except ValueError:
-          print(f"Column number:{id} value:{row}")
+          print(f"error Row number:{id+2} value:{row}")
           continue
-         
+        print(f"Row number:{id+2} value:{row}")
         # Creating the lists for X and Y data 
         X_Data.append(float(RawData[0]))
         Y_Data.append(float(RawData[1]))
@@ -76,7 +76,7 @@ def PlotData(X_Data: list,Y_Data: list,X_Label:str,Y_Label:str):
 
 
 if __name__== "__main__":
-  
+  '''
   #Defining the csv file to read (File is within the same directory)
   File= input("Input the file name, if using sample data file input:-" 
   "             \n Format input as XXXX.csv: ")
@@ -84,8 +84,9 @@ if __name__== "__main__":
   # If the File name input was - swapping it for the actual sample file name 
   if File == "-":
     File= 'data0x00.csv'
+ '''
+  File= 'data0x00.csv'
 
-
-    _, X_Data, Y_Data,X_Label,Y_Label=ReadCsv(File)
-    PlotData(X_Data,Y_Data,X_Label,Y_Label)
+  _, X_Data, Y_Data,X_Label,Y_Label=ReadCsv(File)
+  PlotData(X_Data,Y_Data,X_Label,Y_Label)
     
