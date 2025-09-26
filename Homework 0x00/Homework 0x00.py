@@ -11,7 +11,7 @@ from matplotlib import pyplot as plt
 
 
 #Defining the csv file to read (currently a single file within the same directory)
-DataFile= 'data0x00.csv'
+File= 'data0x00.csv'
 
 #Initializing lists to hold X data from column 1 and Y data from column 2
 X_Data=[]
@@ -19,9 +19,9 @@ Y_Data=[]
 
 
 
-def ReadCsv():
+def ReadCsv(File):
   # Opening the predefined csv Data file 
-   with open(DataFile,'r') as f: 
+   with open(File,'r') as f: 
     # Grabbing the header of the file 
     header= f.readline().strip().split(',')
 
@@ -59,6 +59,6 @@ def PlotData(X_Data,Y_Data,X_Label,Y_Label):
 
 
 if __name__== "__main__":
-    _, X_Data, Y_Data,X_Label,Y_Label=ReadCsv()
+    _, X_Data, Y_Data,X_Label,Y_Label=ReadCsv(File)
     PlotData(X_Data,Y_Data,X_Label,Y_Label)
     
