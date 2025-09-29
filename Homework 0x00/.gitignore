@@ -3,3 +3,6 @@ __pycache__/
 
 #Ignore docx files
 *.docx
+
+# Ignore .png files
+*.png
