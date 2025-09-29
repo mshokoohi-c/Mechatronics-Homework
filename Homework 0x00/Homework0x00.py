@@ -3,7 +3,8 @@ Author: Michael Shokoohi
 Term: Fall 2025
 Course: Mechatronics ME 405
 Assignment Description: Write a python Script that is capable of reading a csv file and plotting the data
-                        Note that the csv file should be able to have cells with white space or comments that are ignored by script. 
+                        Note that the csv file should be able to have cells with white space, comments, or text
+                        that are ignored by script but flags the row with error type.
 '''
 from matplotlib import pyplot as plt
 import numpy as np
@@ -23,7 +24,7 @@ def ReadCsv(File):
   Output: True on successful execution, X_Data (list of float), Y_Data (list of float), X-axis label (string), Y-axis label (string)
   '''
    
-  # Opening the predefined csv Data file 
+  # Opening the csv Data file 
   with open(File,'r') as f: 
     # Grabbing the header of the file 
     header= f.readline().strip().split(',')
@@ -33,18 +34,31 @@ def ReadCsv(File):
         RawData=row.strip().split(',')
 
         # Checking if the vales in the first 2 columns of each row
-        # are able to be converted to float. This ignores the entries with words or symbols
+        # are able to be converted to float.
         try: 
           float(RawData[0])
           float(RawData[1])
-        
+          
         except ValueError:
-          print(f"error Row number:{id+2} value:{row}")
-          continue
-        print(f"Row number:{id+2} value:{row}")
+          #Detecting if there is a comment in the line 
+          if "#" in row:
+             print(f"There is a comment on row: {id+2} ")
+             continue
+             
+          # Detecting if there are atleast 2 elements in the row
+          if len(RawData)<2 : 
+            print(f"There are less than 2 elements on row {id+2}") 
+            continue
+          
+          # Detecting if there are any letters or symbols present that are not part of a comment
+          if not RawData[0].isdigit() or not RawData[1].isdigit():
+             print(f"There is either a letter of symbol on row: {id+2}. And it is not part of a comment")
+             continue
+
         # Creating the lists for X and Y data 
         X_Data.append(float(RawData[0]))
         Y_Data.append(float(RawData[1]))
+
     return True, X_Data, Y_Data, header[0], header[1]
 
 
@@ -76,17 +90,13 @@ def PlotData(X_Data: list,Y_Data: list,X_Label:str,Y_Label:str):
 
 
 if __name__== "__main__":
-  '''
   #Defining the csv file to read (File is within the same directory)
-  File= input("Input the file name, if using sample data file input:-" 
-  "             \n Format input as XXXX.csv: ")
-
-  # If the File name input was - swapping it for the actual sample file name 
-  if File == "-":
-    File= 'data0x00.csv'
- '''
   File= 'data0x00.csv'
+ 
 
+  #Reading and collecting data from csv
   _, X_Data, Y_Data,X_Label,Y_Label=ReadCsv(File)
+
+  #Plotting the collected data
   PlotData(X_Data,Y_Data,X_Label,Y_Label)
     
